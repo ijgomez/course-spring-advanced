@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="
+       	http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+   	">
+
+	<bean id="client" class="org.course.spring.beans.Client">
+		<property name="name" value="abc" />
+		<property name="account" ref="account" />
+	</bean>
+
+	<bean id="account" class="org.course.spring.beans.Account">
+		<property name="amount" value="1000.25d" />
+	</bean>
+
+</beans>

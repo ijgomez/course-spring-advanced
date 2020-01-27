@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:p="http://www.springframework.org/schema/p"
+	xsi:schemaLocation="
+	       http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+	       http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd
+	">
+	
+	<context:annotation-config />
+	
+	<bean id="obligatorioBean" class="org.course.spring.beans.ObligatorioBean" p:texto="Un texto cualquiera uno">
+		<qualifier value="no_especial" />
+	</bean>
+	
+	<bean id="obligatorioBean1" class="org.course.spring.beans.ObligatorioBean">
+		<qualifier value="especial" />
+		<property name="texto" value="Un texto cualquiera dos" />
+	</bean>
+	<bean id="autoBean" class="org.course.spring.beans.AutoBean" />
+	
+	<bean id="unLiteral" class="java.lang.String">
+		<constructor-arg
+			value="Un literal construido por Spring" />
+	</bean>
+	
+	<bean id="resourceBean" class="org.course.spring.beans.ResourceBean" />
+	
+	<context:component-scan base-package="org.course.spring" />
+</beans>

@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation=" http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.5.xsd">
+    
+    <bean id="comando" class="org.course.spring.commands.CommandOne" scope="prototype"/>
+    
+    <bean id="gestorComandos" class="org.course.spring.commands.CommandManager">
+        <lookup-method name="create" bean="comando"/>
+    </bean>
+    
+    <bean id="gestorComandos1" class="org.course.spring.commands.CommandManager">
+        <lookup-method name="create" bean="comando"/>
+        <replaced-method name="otherMethod" replacer="reemplazo"/>
+    </bean>
+    
+    <bean id="reemplazo" class="org.course.spring.utils.MyMethodReplacer"/>
+    
+</beans>

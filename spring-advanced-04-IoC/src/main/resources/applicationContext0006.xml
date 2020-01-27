@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+    
+    <bean id="empleado2" class="org.course.spring.beans.Employee" autowire="byName" init-method="init" destroy-method="destroy">
+        <property name="name" value="Empleado2"/>
+        <property name="password" value="ClaveEmpleado2"/>
+        <property name="age" value="30"/>
+    </bean>
+    <bean id="nomina" class="org.course.spring.beans.Payroll">
+        <property name="amount" value="3000.0d"/>
+    </bean>
+    
+</beans>

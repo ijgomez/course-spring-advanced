@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+       
+    <bean id="empleado1" class="org.course.spring.beans.Employee">
+        <property name="name" value="Empleado1"/>
+        <property name="password" value="ClaveEmpleado1"/>
+        <property name="age" value="25"/>
+        <property name="payroll" ref="payroll"/>
+    </bean>
+    <bean id="payroll" class="org.course.spring.beans.Payroll"/>
+    
+</beans>

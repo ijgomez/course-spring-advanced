@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="
+       	http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.2.xsd
+	">
+    
+    <bean id="usuario" class="org.course.spring.beans.User"/>
+    
+    <bean class="org.course.spring.postprocessor.MyBeanPostProcessor"/>
+    
+    <bean id="demoBean" class="org.course.spring.events.MyApplicationContextAware"/>
+    <bean id="demoListener" class="org.course.spring.events.MyApplicationListener"/>
+    
+    <bean id="inicializacionBean" class="org.course.spring.lifecicle.InicializacionBean"/>
+    <bean id="destruccionBean" class="org.course.spring.lifecicle.DestruccionBean"/>
+    <bean id="deDondeVengoBean" class="org.course.spring.lifecicle.DeDondeVengoBean"/>
+    <bean id="comoMeLlamoBean" class="org.course.spring.lifecicle.ComoMeLlamoBean"/>
+    <bean id="factoriaUsuarioBean" class="org.course.spring.lifecicle.UserFactoryBean">
+        <property name="factory">
+            <bean class="org.springframework.beans.factory.config.ObjectFactoryCreatingFactoryBean">
+                <property name="targetBeanName" value="usuarioPrototipo"/>
+            </bean>
+        </property>
+    </bean>
+    <bean id="usuarioPrototipo" class="org.course.spring.beans.User" scope="prototype"/>
+    
+</beans>

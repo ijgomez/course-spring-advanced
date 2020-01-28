@@ -17,3 +17,4 @@ List of exercises and examples of course:
 - spring-advanced-07-internationalization: Internationalization.
 - spring-advanced-08-config-annotations: Configuración con anotaciones.
 - spring-advanced-09-configurable: Uso de @Configurable.
+- spring-advanced-10-validation: : Uso "a mano" del mecanismo de validación en Spring

@@ -18,3 +18,4 @@ List of exercises and examples of course:
 - spring-advanced-08-config-annotations: Configuración con anotaciones.
 - spring-advanced-09-configurable: Uso de @Configurable.
 - spring-advanced-10-validation: : Uso "a mano" del mecanismo de validación en Spring
+- spring-advanced-11-annonimus-bean: Uso de beans cuyos nombres han sido generados por Spring.

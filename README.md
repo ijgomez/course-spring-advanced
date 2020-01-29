@@ -19,3 +19,5 @@ List of exercises and examples of course:
 - spring-advanced-09-configurable: Uso de @Configurable.
 - spring-advanced-10-validation: : Uso "a mano" del mecanismo de validación en Spring
 - spring-advanced-11-annonimus-bean: Uso de beans cuyos nombres han sido generados por Spring.
+- spring-advanced-12-proxy: Creación de un proxy mediante el API de Spring.
+- spring-advanced-13-proxy: Creación de proxies en Java.

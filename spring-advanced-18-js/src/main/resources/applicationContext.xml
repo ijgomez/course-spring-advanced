@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:lang="http://www.springframework.org/schema/lang"
+	xsi:schemaLocation="
+       http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+       http://www.springframework.org/schema/lang http://www.springframework.org/schema/lang/spring-lang.xsd
+   ">
+
+     <lang:groovy id="person">
+        <lang:inline-script>
+        <![CDATA[
+            import org.course.spring.beans.Person
+            
+            class PersonaGroovy implements Person {
+                String nombre
+
+                String datosPersonales(){
+                    "Mi nombre es $nombre"
+                }
+            }
+            
+            class OtraPersonaGroovy implements Person {
+                String nombre
+                Date fecha = new Date()
+
+                String datosPersonales(){
+                    "Mi nombre es $nombre a fecha $fecha"
+                }
+            }
+
+            def numero = Math.random()
+            println numero
+
+            if(numero < 0.5d)
+                return new PersonaGroovy()
+            else
+                return new OtraPersonaGroovy()
+        ]]>
+        </lang:inline-script>
+        <lang:property name="nombre" value="Un nombre cualquiera"/>
+    </lang:groovy>
+    
+</beans>

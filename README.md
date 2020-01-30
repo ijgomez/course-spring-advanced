@@ -21,3 +21,5 @@ List of exercises and examples of course:
 - spring-advanced-11-annonimus-bean: Uso de beans cuyos nombres han sido generados por Spring.
 - spring-advanced-12-proxy: Creación de un proxy mediante el API de Spring.
 - spring-advanced-13-proxy: Creación de proxies en Java.
+- spring-advanced-14-groovy: Uso de clases Groovy integradas con Java. Obsérvese las diferencias entre las clases "PersonaGroovy" y "PersonaJava".
+- spring-advanced-15-groovy: Lo mismo que el ejemplo anterior pero usando anotaciones.

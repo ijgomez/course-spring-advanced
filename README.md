@@ -23,3 +23,4 @@ List of exercises and examples of course:
 - spring-advanced-13-proxy: Creación de proxies en Java.
 - spring-advanced-14-groovy: Uso de clases Groovy integradas con Java. Obsérvese las diferencias entre las clases "PersonaGroovy" y "PersonaJava".
 - spring-advanced-15-groovy: Lo mismo que el ejemplo anterior pero usando anotaciones.
+- spring-advanced-16-groovy: Uso de scripts Groovy integrados con Java.

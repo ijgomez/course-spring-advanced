@@ -28,3 +28,4 @@ List of exercises and examples of course:
 - spring-advanced-18-js: Uso de JavaScript directamente desde Java.
 - spring-advanced-19-resources: Uso de la opción de recurso de Spring aplicada a un archivo presente en el classpath de la aplicación.
 - spring-advanced-20-resources: Uso de la interfaz Resource y algunas anotaciones.
+- spring-advanced-21-aspectj:

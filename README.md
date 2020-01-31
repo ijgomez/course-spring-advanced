@@ -26,3 +26,4 @@ List of exercises and examples of course:
 - spring-advanced-16-groovy: Uso de scripts Groovy integrados con Java.
 - spring-advanced-17-groovy: Uso de scripts Groovy embebidos en la cinfiguración de Spring.
 - spring-advanced-18-js: Uso de JavaScript directamente desde Java.
+- spring-advanced-19-resources: Uso de la opción de recurso de Spring aplicada a un archivo presente en el classpath de la aplicación.

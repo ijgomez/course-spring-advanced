@@ -32,3 +32,4 @@ List of exercises and examples of course:
 - spring-advanced-22-aspectj: Creación de aspectos, advice e introducciones.
 - spring-advanced-23-aspectj: Creación de anotaciones y su uso con aspectos.
 - spring-advanced-24-aspectj: Creación de anotaciones, uso con aspectos con persistencia integrada.
+- spring-advanced-25-aspectj: Ejemplo del uso de LTW (Load Time Weaving).

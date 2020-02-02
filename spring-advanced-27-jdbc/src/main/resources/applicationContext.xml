@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:tx="http://www.springframework.org/schema/tx"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xsi:schemaLocation="
+       http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+       http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd
+       http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd
+   ">
+
+    <bean id="txManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+        <property name="dataSource" ref="dataSource"/>
+    </bean>
+    <tx:advice id="txAdvice" transaction-manager="txManager">
+        <tx:attributes>
+            <tx:method name="contar*" read-only="true"/>
+            <tx:method name="encontrar*" read-only="true"/>
+            <tx:method name="*" rollback-for="excepciones.PersonaException"/>
+        </tx:attributes>
+    </tx:advice>
+    <aop:config>
+        <aop:pointcut id="servicioPersona" expression="execution(* dao.PersonaDao.*(..))"/>
+        <aop:advisor advice-ref="txAdvice" pointcut-ref="servicioPersona"/>
+    </aop:config>
+    
+    <bean class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+        <property name="locations">
+            <list>
+                <value>classpath:recursos/jdbc.derby.properties</value>
+                <value>classpath:recursos/jdbc.mysql.properties</value>
+            </list>
+        </property>
+    </bean>
+    
+    <bean id="dataSource" destroy-method="close" class="org.apache.commons.dbcp.BasicDataSource">
+        <property name="driverClassName" value="${jdbc.derby.driver}"/>
+        <property name="url" value="${jdbc.derby.url}"/>
+        <property name="username" value="${jdbc.derby.nombre}"/>
+        <property name="password" value="${jdbc.derby.clave}"/>
+    </bean>
+    
+    <bean id="personaDao" class="org.course.spring.beans.PersonaImpl">
+        <property name="dataSource" ref="dataSource"/>
+    </bean>
+             
+</beans>

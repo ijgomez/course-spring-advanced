@@ -7,7 +7,7 @@
 		<artifactId>spring-advanced-parent</artifactId>
 		<version>1.0</version>
 	</parent>
-	<artifactId>spring-advanced-26-inheritance</artifactId>
+	<artifactId>spring-advanced-28-jdbc</artifactId>
 	<dependencies>
 		<dependency>
 			<groupId>org.springframework</groupId>
@@ -15,11 +15,7 @@
 		</dependency>
 		<dependency>
 			<groupId>org.springframework</groupId>
-			<artifactId>spring-tx</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>org.springframework</groupId>
-			<artifactId>spring-orm</artifactId>
+			<artifactId>spring-jdbc</artifactId>
 		</dependency>
 		<dependency>
             <groupId>org.aspectj</groupId>
@@ -28,10 +24,6 @@
         <dependency>
 		    <groupId>org.aspectj</groupId>
 		    <artifactId>aspectjweaver</artifactId>
-		</dependency>
-        <dependency>
-		    <groupId>org.hibernate</groupId>
-		    <artifactId>hibernate-entitymanager</artifactId>
 		</dependency>
         <dependency>
         	<groupId>org.apache.commons</groupId>

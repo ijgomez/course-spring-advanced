@@ -1,11 +1,15 @@
 package org.course.spring;
 
+import java.sql.Connection;
+import java.sql.Statement;
 import java.util.Collection;
 
-import org.course.spring.beans.Persona;
-import org.course.spring.beans.PersonaImpl;
-import org.course.spring.daos.PersonaDao;
-import org.course.spring.exceptions.PersonaException;
+import javax.sql.DataSource;
+
+import org.course.spring.beans.Person;
+import org.course.spring.beans.PersonImpl;
+import org.course.spring.daos.PersonDao;
+import org.course.spring.exceptions.PersonException;
 import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.BeforeClass;
@@ -24,6 +28,12 @@ public class ExerciseTest {
 	public static void init() throws Exception {
 		ctx = new ClassPathXmlApplicationContext(new String[] { "applicationContext.xml" });
 		log.info("Contexto cargado");
+		
+		DataSource datasource = (DataSource) ctx.getBean("dataSource");
+		try (Connection connection = datasource.getConnection(); Statement statement = connection.createStatement();) {
+            statement.execute("CREATE TABLE personas (id BIGINT NOT NULL GENERATED ALWAYS AS IDENTITY, nombre VARCHAR(255), PRIMARY KEY (ID))");
+            connection.commit();
+        }
 	}
 
 	@AfterClass
@@ -31,9 +41,11 @@ public class ExerciseTest {
 		ctx.close();
 	}
 	
+	private PersonDao personDao;
+	
 	@Before
 	public void beforeTest() {
-	
+		personDao = (PersonDao) ctx.getBean("personDao");
 	}
 
 	@Test
@@ -42,36 +54,36 @@ public class ExerciseTest {
         ejecutarInsercionDevolviendoLaClavePrimaria();
     }
 
-	private void ejecutarJdbcSpring() throws PersonaException {
+	private void ejecutarJdbcSpring() throws PersonException {
         final int MAX_PERSONAS = 5;
-        PersonaDao personaDao = (PersonaDao) ctx.getBean("personaDao");
+        
         log.info("Insertando algunas personas en la base de datos...");
         for(int i = 0; i < MAX_PERSONAS; i++){
-            personaDao.insertarPersona(new PersonaImpl(i,"nombre"+i));
+            personDao.insertarPersona(new PersonImpl(i,"nombre"+i));
         }
-        System.out.printf("Se han encontrado %d personas en la base de datos\n",personaDao.contarPersonas());
-        System.out.printf("Se han encontrado %d personas en la base de datos cuyo nombre empieza por %s\n",personaDao.contarPersonasUsandoParametros("n"),"n");
+        log.info("Se han encontrado {} personas en la base de datos.",personDao.contarPersonas());
+        log.info("Se han encontrado {} personas en la base de datos cuyo nombre empieza por {}",personDao.contarPersonasUsandoParametros("n"),"n");
         final Integer id = 3;
         log.info("Buscando una persona con Id = " + id);
-        Persona p;
+        Person p;
         try {
-            p = personaDao.encontrarPersona(id);
-            System.out.printf("Id %d. Nombre %s\n",p.getId(),p.getNombre());
+            p = personDao.encontrarPersona(id);
+            log.info("Id {}. Nombre {}",p.getId(),p.getNombre());
         } catch (DataAccessException ex) {
             log.info("No se ha encontrado a nadie con el identificador " + id);
         }
         try {
-            personaDao.actualizarPersona(new PersonaImpl(id,"Nuevo nombre") );
-            personaDao.borrarPersona(new PersonaImpl(id + 1,"Da igual") );
+            personDao.actualizarPersona(new PersonImpl(id,"Nuevo nombre") );
+            personDao.borrarPersona(new PersonImpl(id + 1,"Da igual") );
         } catch (DataAccessException ex) {
             log.info("Ha ocurrido un error: " + ex.getMessage());
         }
         log.info("Lista de todas las personas en la base de datos");
         try {
-            Collection<Persona> todos = personaDao.encontrarTodos();
-            System.out.printf("Se han encontrado %d persona(s) en la base de datos\n",todos.size());
-            for (Persona persona : todos) {
-                System.out.printf("Id %d. Nombre %s\n",persona.getId(),persona.getNombre());
+            Collection<Person> todos = personDao.encontrarTodos();
+            log.info("Se han encontrado {} persona(s) en la base de datos.",todos.size());
+            for (Person persona : todos) {
+            	log.info("Id {}. Nombre {}",persona.getId(),persona.getNombre());
             }
         } catch (DataAccessException ex) {
             log.info("Ha ocurrido un error: " + ex.getMessage());
@@ -79,9 +91,9 @@ public class ExerciseTest {
     }
     
     private void ejecutarInsercionDevolviendoLaClavePrimaria() {
-        PersonaDao personaDao = (PersonaDao) ctx.getBean("personaDao");
+        
         try {
-            Integer clave = personaDao.insertarPersonaDevolviendoLaClavePrimaria(new PersonaImpl(null,"Clave primaria"));
+            Integer clave = personDao.insertarPersonaDevolviendoLaClavePrimaria(new PersonImpl(null,"Clave primaria"));
             log.info("La clave primaria es " + clave);
         } catch (DataAccessException ex) {
             log.info("Ha ocurrido un error: " + ex.getMessage());

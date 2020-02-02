@@ -2,8 +2,9 @@ package org.course.spring.beans;
 
 import java.io.Serializable;
 
-public interface IContacto extends Serializable {
-    public void setId(Integer id);
+public interface Contact extends Serializable {
+    
+	public void setId(Integer id);
 
     public Integer getId();
 

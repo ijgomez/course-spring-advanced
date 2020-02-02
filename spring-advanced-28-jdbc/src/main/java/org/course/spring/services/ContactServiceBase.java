@@ -3,16 +3,13 @@ package org.course.spring.services;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Types;
-
 import java.util.ArrayList;
 import java.util.List;
 
 import javax.sql.DataSource;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
-import org.course.spring.beans.Contacto;
-import org.course.spring.beans.IContacto;
+import org.course.spring.beans.Contact;
+import org.course.spring.beans.ContactImpl;
 import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.SqlParameter;
 import org.springframework.jdbc.core.support.JdbcDaoSupport;
@@ -22,11 +19,11 @@ import org.springframework.jdbc.object.SqlUpdate;
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
-public abstract class ServicioContactos extends JdbcDaoSupport implements IServicioContactos {
+public abstract class ContactServiceBase extends JdbcDaoSupport implements ContactService {
 
 	private static final long serialVersionUID = -6278461190204687138L;
 
-	private List<IContacto> contactos = new ArrayList<IContacto>();
+	private List<Contact> contactos = new ArrayList<Contact>();
     
 	private ConsultaContactos consultaContactos;
     
@@ -34,8 +31,6 @@ public abstract class ServicioContactos extends JdbcDaoSupport implements IServi
     
 	private ActualizarContacto actContacto;
     
-	
-
     @Override
     protected void initDao() {
         consultaContactos = new ConsultaContactos(getDataSource());
@@ -43,11 +38,7 @@ public abstract class ServicioContactos extends JdbcDaoSupport implements IServi
         actContacto = new ActualizarContacto(getDataSource());
     }
 
-    public ServicioContactos() {
-    }
-
-    @SuppressWarnings("unchecked")
-    public List<IContacto> getContactos() throws DataAccessException {
+    public List<Contact> getContactos() throws DataAccessException {
         synchronized (this.contactos) {
             log.info("Cargando los contactos de la base de datos");
             contactos.clear();
@@ -56,27 +47,27 @@ public abstract class ServicioContactos extends JdbcDaoSupport implements IServi
         }
     }
 
-    public void insertarContacto(IContacto c) throws DataAccessException {
+    public void insertarContacto(Contact c) throws DataAccessException {
         nuevoContacto.insert(c);
     }
 
-    public void actualizarContacto(IContacto c) throws DataAccessException {
+    public void actualizarContacto(Contact c) throws DataAccessException {
         actContacto.update(c);
     }
 
-    protected class ConsultaContactos extends MappingSqlQuery {
-        protected ConsultaContactos(DataSource ds, String sql) {
+    protected class ConsultaContactos extends MappingSqlQuery<Contact> {
+        
+    	protected ConsultaContactos(DataSource ds, String sql) {
             super(ds, sql);
         }
 
         protected ConsultaContactos(DataSource ds) {
-            super(ds, 
-                  "SELECT id,nombre,comentario FROM contactos ORDER BY nombre");
+            super(ds, "SELECT id,nombre,comentario FROM contactos ORDER BY nombre");
             compile();
         }
 
-        protected Object mapRow(ResultSet rs, int rownum) throws SQLException {
-            IContacto contacto = new Contacto();
+        protected Contact mapRow(ResultSet rs, int rownum) throws SQLException {
+            Contact contacto = new ContactImpl();
             contacto.setId(new Integer(rs.getInt("id")));
             contacto.setNombre(rs.getString("nombre"));
             contacto.setComentario(rs.getString("comentario"));
@@ -93,15 +84,14 @@ public abstract class ServicioContactos extends JdbcDaoSupport implements IServi
             compile();
         }
 
-        protected void insert(IContacto contacto) {
-            Object[] objs = 
-                new Object[] { contacto.getNombre(), contacto.getComentario() };
+        protected void insert(Contact contact) {
+            Object[] objs = new Object[] { contact.getNombre(), contact.getComentario() };
             super.update(objs);
-            obtenerId(contacto);
+            obtenerId(contact);
         }
 
-        private void obtenerId(IContacto contacto) {
-            contacto.setId(getJdbcTemplate().queryForObject(getIdentidad(), Integer.class));
+        private void obtenerId(Contact contact) {
+            contact.setId(getJdbcTemplate().queryForObject(getIdentidad(), Integer.class));
         }
 
     }
@@ -116,10 +106,8 @@ public abstract class ServicioContactos extends JdbcDaoSupport implements IServi
             compile();
         }
 
-        protected int update(IContacto contacto) {
-            return this.update(new Object[] { contacto.getNombre(), 
-                                              contacto.getComentario(), 
-                                              contacto.getId() });
+        protected int update(Contact contact) {
+            return this.update(new Object[] { contact.getNombre(), contact.getComentario(), contact.getId() });
         }
     }
 

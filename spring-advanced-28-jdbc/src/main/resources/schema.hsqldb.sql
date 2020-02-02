@@ -1,0 +1,7 @@
+DROP TABLE contacts;
+CREATE TABLE contacts (
+	id BIGINT NOT NULL GENERATED ALWAYS AS IDENTITY , 
+	name VARCHAR(255),  
+	comments VARCHAR(255), 
+	PRIMARY KEY (ID)
+);

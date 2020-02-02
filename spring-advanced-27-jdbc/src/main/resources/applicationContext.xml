@@ -16,31 +16,30 @@
         <tx:attributes>
             <tx:method name="contar*" read-only="true"/>
             <tx:method name="encontrar*" read-only="true"/>
-            <tx:method name="*" rollback-for="excepciones.PersonaException"/>
+            <tx:method name="*" rollback-for="org.course.spring.excepcions.PersonException"/>
         </tx:attributes>
     </tx:advice>
     <aop:config>
-        <aop:pointcut id="servicioPersona" expression="execution(* dao.PersonaDao.*(..))"/>
+        <aop:pointcut id="servicioPersona" expression="execution(* *.daos.PersonDao.*(..))"/>
         <aop:advisor advice-ref="txAdvice" pointcut-ref="servicioPersona"/>
     </aop:config>
     
     <bean class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
         <property name="locations">
             <list>
-                <value>classpath:recursos/jdbc.derby.properties</value>
-                <value>classpath:recursos/jdbc.mysql.properties</value>
+                <value>classpath:jdbc.hsqldb.properties</value>
             </list>
         </property>
     </bean>
     
     <bean id="dataSource" destroy-method="close" class="org.apache.commons.dbcp.BasicDataSource">
-        <property name="driverClassName" value="${jdbc.derby.driver}"/>
-        <property name="url" value="${jdbc.derby.url}"/>
-        <property name="username" value="${jdbc.derby.nombre}"/>
-        <property name="password" value="${jdbc.derby.clave}"/>
+        <property name="driverClassName" value="${database.connection.driver}"/>
+        <property name="url" value="${database.connection.url}"/>
+        <property name="username" value="${database.connection.user}"/>
+        <property name="password" value="${database.connection.password}"/>
     </bean>
     
-    <bean id="personaDao" class="org.course.spring.beans.PersonaImpl">
+    <bean id="personDao" class="org.course.spring.daos.PersonDaoImpl">
         <property name="dataSource" ref="dataSource"/>
     </bean>
              

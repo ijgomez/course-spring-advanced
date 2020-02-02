@@ -1,40 +1,37 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<beans xmlns="http://www.springframework.org/schema/beans"
-       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-       xmlns:aop="http://www.springframework.org/schema/aop"
-       xmlns:tx="http://www.springframework.org/schema/tx"
-       xsi:schemaLocation="
-       http://www.springframework.org/schema/beans 
-       http://www.springframework.org/schema/beans/spring-beans-2.5.xsd 
-       http://www.springframework.org/schema/aop 
-       http://www.springframework.org/schema/aop/spring-aop-2.5.xsd 
-       http://www.springframework.org/schema/tx 
-       http://www.springframework.org/schema/tx/spring-tx-2.5.xsd">
-    <bean class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer"
-          id="propertyConfigurer" name="configuradorPropiedades">
+<beans 
+	xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:tx="http://www.springframework.org/schema/tx"
+	xsi:schemaLocation="
+       http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd 
+       http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd 
+       http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd"
+	>
+	
+    <bean class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer" id="propertyConfigurer" name="configuradorPropiedades">
         <property name="locations">
             <list>
-                <value>classpath:curso/jdbc/jdbc.properties</value>
+                <value>classpath:jdbc.hsqldb.properties</value>
             </list>
         </property>
     </bean>
-    <bean class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close"
-          id="dataSource">
-        <property name="driverClassName" value="${jdbc.driver}"/>
-        <property name="url" value="${jdbc.url}"/>
-        <property name="username" value="${jdbc.nombre}"/>
-        <property name="password" value="${jdbc.clave}"/>
+    
+    <bean class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close" id="dataSource">
+        <property name="driverClassName" value="${database.connection.driver}"/>
+        <property name="url" value="${database.connection.url}"/>
+        <property name="username" value="${database.connection.user}"/>
+        <property name="password" value="${database.connection.password}"/>
     </bean>
-    <bean id="transactionManager"
-          class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+    
+    <bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
         <property name="dataSource" ref="dataSource"/>
     </bean>
-    <bean id="servicioContactos" class="curso.jdbc.ServicioContactosDerby">
-        <property name="dataSource" ref="dataSource"/>
-    </bean>
+    
+    
     <aop:config>
-        <aop:advisor pointcut="execution(* *..IServicioContactos.*(..))"
-                     advice-ref="txAdvice"/>
+        <aop:advisor pointcut="execution(* *.ContactService.*(..))" advice-ref="txAdvice"/>
     </aop:config>
     <tx:advice id="txAdvice">
         <tx:attributes>
@@ -44,4 +41,8 @@
             <tx:method name="*" read-only="true"/>
         </tx:attributes>
     </tx:advice>
+    
+    <bean id="contactService" class="org.course.spring.services.impl.ContactServicieImpl">
+        <property name="dataSource" ref="dataSource"/>
+    </bean>
 </beans>

@@ -3,9 +3,7 @@ package org.course.spring.beans;
 import java.io.Serializable;
 import java.util.List;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -13,7 +11,7 @@ import javax.persistence.OneToMany;
 
 import lombok.Data;
 
-@Entity(name = "EmpresaSingleTable")
+@Entity
 @Data
 public class Company implements Serializable {
 
@@ -23,7 +21,7 @@ public class Company implements Serializable {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
 
-	@OneToMany(mappedBy = "company", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+	@OneToMany(mappedBy = "company")
 	private List<Employee> employees;
 
 }

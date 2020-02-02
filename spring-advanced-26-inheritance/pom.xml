@@ -7,7 +7,7 @@
 		<artifactId>spring-advanced-parent</artifactId>
 		<version>1.0</version>
 	</parent>
-	<artifactId>spring-advanced-24-inheritance</artifactId>
+	<artifactId>spring-advanced-26-inheritance</artifactId>
 	<dependencies>
 		<dependency>
 			<groupId>org.springframework</groupId>

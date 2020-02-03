@@ -1,4 +1,4 @@
-package org.course.spring.daos;
+package org.course.spring.dao;
 
 import java.sql.SQLException;
 import java.util.List;

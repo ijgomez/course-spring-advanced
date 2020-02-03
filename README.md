@@ -36,4 +36,4 @@ List of exercises and examples of course:
 - spring-advanced-26-inheritance: Uso de JPA con Spring. Tratamiento de jerarquías de herencia usando Hibernate. Toplink no parece soportar la estrategia de herencia "TABLE_PER_CLASS", mientras que hibernate sí. Ver los comentarios a la clase "Persona.java".
 - spring-advanced-27-jdbc: Uso de Spring empleando JDBC como tecnología de acceso a datos.
 - spring-advanced-28-jdbc: Uso de Spring empleando JDBC como tecnolgía de acceso a datos, pero empleando una estrategia de codificación menos común.
-- spring-advanced-20-jdbc: Uso de Jdbc con Spring y SimpleJdbcTemplate.
+- spring-advanced-29-jdbc: Uso de Jdbc con Spring y SimpleJdbcTemplate.

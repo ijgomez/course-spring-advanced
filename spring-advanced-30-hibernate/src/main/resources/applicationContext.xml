@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:tx="http://www.springframework.org/schema/tx"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xsi:schemaLocation="
+       http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+       http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd 
+       http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd
+    ">
+	
+	<bean id="propertyConfigurer" class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+        <property name="locations">
+            <list>
+                <value>classpath:jdbc.hsqldb.properties</value>
+            </list>
+        </property>
+    </bean>
+	
+	 <bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close">
+        <property name="driverClassName" value="${database.connection.driver}"/>
+        <property name="url" value="${database.connection.url}"/>
+        <property name="username" value="${database.connection.user}"/>
+        <property name="password" value="${database.connection.password}"/>
+    </bean>
+	
+	<bean class="org.springframework.orm.hibernate3.LocalSessionFactoryBean" id="sessionFactory">
+        <property name="dataSource" ref="dataSource"/>
+        <property name="mappingResources">
+            <list>
+                <value>/org/course/spring/beans/Person.hbm.xml</value>
+                <value>/org/course/spring/beans/Hobby.hbm.xml</value>
+            </list>
+        </property>
+        <property name="hibernateProperties">
+            <props>
+                <prop key="hibernate.dialect">${hibernate.dialect}</prop>
+                <prop key="hibernate.show_sql">${hibernate.show_sql}</prop>
+                <prop key="hibernate.format_sql">${hibernate.format_sql}</prop>
+                <prop key="hibernate.generate_statistics">${hibernate.generate_statistics}</prop>
+                <prop key="hibernate.hbm2ddl.auto">${hibernate.auto}</prop>
+            </props>
+        </property>
+        <property name="eventListeners">
+            <map>
+                <entry key="merge">
+                    <bean class="org.springframework.orm.hibernate3.support.IdTransferringMergeEventListener"/>
+                </entry>
+            </map>
+        </property>
+    </bean>
+    <bean class="org.springframework.orm.hibernate3.HibernateTransactionManager" id="transactionManager">
+        <property name="sessionFactory" ref="sessionFactory"/>
+    </bean>
+    
+    <bean class="org.course.spring.aspects.Profiler"/>
+    <bean class="org.course.spring.aspects.Recovery"/>
+    
+    <aop:aspectj-autoproxy/>
+    <aop:config>
+        <aop:advisor pointcut="execution(* *..PersonService.*(..))" advice-ref="txAdvice"/>
+    </aop:config>
+    
+    <tx:advice id="txAdvice">
+        <tx:attributes>
+            <tx:method name="insert*"/>
+            <tx:method name="update*"/>
+            <tx:method name="delete*"/>
+            <tx:method name="*" read-only="true"/>
+        </tx:attributes>
+    </tx:advice>
+    
+    <bean id="personDao" class="org.course.spring.dao.PersonDaoImpl">
+        <property name="sessionFactory" ref="sessionFactory"/>
+    </bean>
+   
+    <bean id="personService" class="org.course.spring.services.PersonServiceImpl">
+        <property name="personDao" ref="personDao"/>
+    </bean>
+	
+</beans>

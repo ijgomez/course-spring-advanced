@@ -6,6 +6,6 @@
 			<generator class="identity" />
 		</id>
 		<property name="nombre" />
-		<many-to-one name="persona" column="id_persona" class="org.course.spring.beans.Person" />
+		<many-to-one name="person" column="id_persona" class="org.course.spring.beans.Person" />
 	</class>
 </hibernate-mapping>

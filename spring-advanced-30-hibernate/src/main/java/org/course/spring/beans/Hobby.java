@@ -9,6 +9,6 @@ public class Hobby {
 	
 	private String nombre;
 	
-	private Person persona;
+	private Person person;
 
 }

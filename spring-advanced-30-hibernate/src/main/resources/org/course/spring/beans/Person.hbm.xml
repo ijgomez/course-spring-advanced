@@ -2,11 +2,11 @@
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
 <hibernate-mapping auto-import="true" default-lazy="false">
 	<class name="org.course.spring.beans.Person" table="personas">
-		<id name="id" column="id_persona">
+		<id name="id">
 			<generator class="identity" />
 		</id>
 		<property name="nombre" />
-		<set name="aficionesInternas" inverse="true" cascade="all" lazy="true">
+		<set name="aficionesInternas" inverse="true">
 			<key column="id_persona" />
 			<one-to-many class="org.course.spring.beans.Hobby" />
 		</set>

@@ -39,17 +39,13 @@ public class ExerciseTest {
 	private PersonService personService;
 	
 	@Before
-	public void beforeTest() {
-		personService = (PersonService)ctx.getBean("servicioPersona");
+	public void beforeTest() throws Exception {
+		personService = (PersonService)ctx.getBean("personService");
+		cargarDatosPrueba();
 	}
 
 	@Test
 	public void testExercise() throws Exception {
-
-    }
-	
-	@Test
-	public void testAccesoDatos() throws Exception {
         
         log.info("Hay {} personas en la base de datos", personService.countAll());
         log.info("************************************************");
@@ -78,28 +74,33 @@ public class ExerciseTest {
         log.info("************************************************");
         log.info("Aficiones de la persona con id 2 obtenidas de otra manera");
         aficiones = personService.getAficionesDeOtraManera(2);
+        if (aficiones != null)
         for (Hobby aficion: aficiones) {
             log.info("{}", aficion);
         }
         log.info("************************************************");
         log.info("Aficiones de la persona con id 2 de una tercera forma");
         aficiones = personService.getAficionesDeOtraManeraMas(2);
+        if (aficiones != null)
         for (Hobby aficion: aficiones) {
             log.info("{}", aficion);
         }
         log.info("************************************************");
     }
 
-	@Test
-	public void testCargarDatosPrueba() throws Exception {
+
+	private void cargarDatosPrueba() throws Exception {
         log.info("Servicio de personas encontrado");
         for (int i = 0; i < 10; i++) {
             Person p = new Person();
             p.setNombre("pepe" + i);
+            
             Hobby a = new Hobby();
             a.setNombre("Afición" + i);
-            a.setPersona(p);
-            p.getAficionesInternas().add(a);
+            a.setPerson(p);
+//            p.setAficionesInternas(new HashSet<>());
+//            p.getAficionesInternas().add(a);
+            
             personService.insert(p);
         }
         log.info("************************************************");

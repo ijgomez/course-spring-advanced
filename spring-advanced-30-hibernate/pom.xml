@@ -8,6 +8,9 @@
 		<version>1.0</version>
 	</parent>
 	<artifactId>spring-advanced-30-hibernate</artifactId>
+	<properties>
+		<hibernate.version>3.6.10.Final</hibernate.version>
+	</properties>
 	<dependencies>
 		<dependency>
 			<groupId>org.springframework</groupId>
@@ -55,9 +58,9 @@
 		    <version>1.2.2</version>
 		</dependency>
 		<dependency>
-    <groupId>org.hibernate</groupId>
-    <artifactId>hibernate-core</artifactId>
-    <version>4.3.11.Final</version>
-</dependency>
+		    <groupId>org.hibernate</groupId>
+		    <artifactId>hibernate-core</artifactId>
+		    <version>${hibernate.version}</version>
+		</dependency>
 	</dependencies>
 </project>

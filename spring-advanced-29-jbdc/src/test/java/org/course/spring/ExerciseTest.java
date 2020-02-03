@@ -1,8 +1,13 @@
 package org.course.spring;
 
-import org.course.spring.beans.Persona;
-import org.course.spring.beans.PersonaImpl;
-import org.course.spring.daos.PersonaDao;
+import java.sql.Connection;
+import java.sql.Statement;
+
+import javax.sql.DataSource;
+
+import org.course.spring.beans.Person;
+import org.course.spring.beans.PersonImpl;
+import org.course.spring.daos.PersonDao;
 import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.BeforeClass;
@@ -20,6 +25,12 @@ public class ExerciseTest {
 	public static void init() throws Exception {
 		ctx = new ClassPathXmlApplicationContext(new String[] { "applicationContext.xml" });
 		log.info("Contexto cargado");
+		
+		DataSource datasource = (DataSource) ctx.getBean("dataSource");
+		try (Connection connection = datasource.getConnection(); Statement statement = connection.createStatement();) {
+            statement.execute("CREATE TABLE personas (id BIGINT NOT NULL GENERATED ALWAYS AS IDENTITY, nombre VARCHAR(255), PRIMARY KEY (ID))");
+            connection.commit();
+        }
 	}
 
 	@AfterClass
@@ -27,24 +38,28 @@ public class ExerciseTest {
 		ctx.close();
 	}
 	
+	private PersonDao personDao;
+	
 	@Before
 	public void beforeTest() {
-	
+		personDao = (PersonDao) ctx.getBean("personDao");
 	}
 
 	@Test
 	public void testExercise() throws Exception {
-		PersonaDao pdi = (PersonaDao) ctx.getBean("personaDao");
-        Persona p = new PersonaImpl();
+		
+        Person p = new PersonImpl();
         p.setNombre("nuevo" + System.currentTimeMillis());
-//        Integer nuevaClave = pdi.insertarPersonaDevolviendoLaClave(p);
-//        System.out.println("Nueva Clave: " + nuevaClave);
-        pdi.insertarPersona(p);
-        System.out.println("Nueva persona insertada");
-        p = pdi.buscarPersona(1);
-        System.out.println(p);
 
-        System.out.println(pdi.todas());
+        personDao.insertarPersona(p);
+        log.info("Nueva persona insertada");
+        
+        log.info("{}", personDao.todas());
+        
+        p = personDao.buscarPersona(0);
+        log.info("{}", p);
+
+        
     }
 
 	

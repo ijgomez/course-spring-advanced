@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="
+       http://www.springframework.org/schema/beans 
+       http://www.springframework.org/schema/beans/spring-beans-2.5.xsd">
+	
+	<bean id="propertyConfigurer" class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+        <property name="locations">
+            <list>
+                <value>classpath:jdbc.hsqldb.properties</value>
+            </list>
+        </property>
+    </bean>
+	
+	 <bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close">
+        <property name="driverClassName" value="${database.connection.driver}"/>
+        <property name="url" value="${database.connection.url}"/>
+        <property name="username" value="${database.connection.user}"/>
+        <property name="password" value="${database.connection.password}"/>
+    </bean>
+	
+	<bean id="personDao" class="org.course.spring.daos.PersonDaoImpl">
+		<property name="dataSource" ref="dataSource" />
+	</bean>
+	
+</beans>

@@ -38,3 +38,4 @@ List of exercises and examples of course:
 - spring-advanced-28-jdbc: Uso de Spring empleando JDBC como tecnolgía de acceso a datos, pero empleando una estrategia de codificación menos común.
 - spring-advanced-29-jdbc: Uso de Jdbc con Spring y SimpleJdbcTemplate.
 - spring-advanced-30-hibernate: Uso Spring con Hibernate. Tratamiento de relaciones múltiples entre clases.
+- spring-advanced-31-jpa-groovy: 

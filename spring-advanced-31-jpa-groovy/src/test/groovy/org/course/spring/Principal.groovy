@@ -1,16 +1,7 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
-
-package ejemplojpagroovy
+package org.course.spring
 
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
-/**
- *
- * @author jose maria
- */
 class Principal {
     def ctx;
     def ejemploServicio;

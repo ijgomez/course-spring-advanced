@@ -7,16 +7,20 @@
        xmlns:tx="http://www.springframework.org/schema/tx"
        xmlns:aop="http://www.springframework.org/schema/aop"
        xsi:schemaLocation="
-       http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.5.xsd
-       http://www.springframework.org/schema/lang http://www.springframework.org/schema/lang/spring-lang-2.5.xsd
-       http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-2.5.xsd
-       http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-2.5.xsd
-       http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-2.5.xsd">
+	       http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+	       http://www.springframework.org/schema/lang http://www.springframework.org/schema/lang/spring-lang.xsd
+	       http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd
+	       http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd
+	       http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd
+	 ">
 
-    <bean id="entityManagerFactory" class="org.springframework.orm.jpa.LocalEntityManagerFactoryBean" p:persistenceUnitName="EjemploJpaGroovyPU"/>
+    <bean id="entityManagerFactory" class="org.springframework.orm.jpa.LocalEntityManagerFactoryBean" p:persistenceUnitName="ExerciseJpaGroovyPU"/>
+    
     <bean id="transactionManager" class="org.springframework.orm.jpa.JpaTransactionManager" p:entityManagerFactory-ref="entityManagerFactory"/>
 
-    <context:component-scan base-package="servicios,aspectos" />
+    <context:component-scan base-package="org.course.spring" />
+    
     <tx:annotation-driven proxy-target-class="true"/>
+    
     <aop:aspectj-autoproxy/>
 </beans>

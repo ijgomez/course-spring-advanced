@@ -1,9 +1,4 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
-
-package servicios
+package org.course.spring.services
 
 import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;
@@ -13,18 +8,15 @@ import javax.persistence.Transient;
 import org.springframework.stereotype.Repository;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import entidades.Usuario
-import entidades.Rol
+import org.course.spring.beans.Usuario
+import org.course.spring.beans.Rol
 
-/**
- *
- * @author jose maria
- */
 @Repository
 @Transactional(readOnly = true)
 @Service("ejemploServicio")
-class EjemploServicio{
-    @PersistenceContext
+class ExerciseService {
+    
+	@PersistenceContext
     EntityManager em;
 
     @Transient

@@ -1,9 +1,4 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
-
-package aspectos
+package org.course.spring.aspects
 
 import org.aspectj.lang.JoinPoint
 import org.aspectj.lang.annotation.Aspect
@@ -11,13 +6,9 @@ import org.aspectj.lang.annotation.Before
 import org.springframework.stereotype.Component
 import org.aspectj.lang.annotation.AfterThrowing;
 
-/**
- *
- * @author jose maria
- */
 @Component
 @Aspect
-class AspectoGeneral {
+class GeneralAspect {
     @Before("execution(* servicios.EjemploServicio.*(..)))")
     def traza(JoinPoint p) {
         println "Se va a ejecutar el método: ${p.getSignature().toLongString()}".toUpperCase()

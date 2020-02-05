@@ -1,9 +1,4 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
-
-package entidades
+package org.course.spring.beans
 
 import javax.persistence.Entity
 import javax.persistence.Id
@@ -11,13 +6,10 @@ import javax.persistence.GeneratedValue
 import javax.persistence.GenerationType
 import javax.persistence.ManyToOne
 
-/**
- *
- * @author jose maria
- */
 @Entity
 class Rol {
-    @Id
+   
+	@Id
     @GeneratedValue(strategy=GenerationType.AUTO)
     Long id
 

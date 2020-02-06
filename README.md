@@ -40,3 +40,4 @@ List of exercises and examples of course:
 - spring-advanced-30-hibernate: Uso Spring con Hibernate. Tratamiento de relaciones múltiples entre clases.
 - spring-advanced-31-jpa-groovy: 
 - spring-advanced-32-hibernate-annotations: Anotaciones:  Uso Spring con Hibernate y anotaciones. Tratamiento de relaciones múltiples entre clases.
+- spring-advanced-33-jpa:

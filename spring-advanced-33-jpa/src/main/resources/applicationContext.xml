@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:tx="http://www.springframework.org/schema/tx"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xsi:schemaLocation="
+       http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+       http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd 
+       http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd
+    ">
+	
+	<bean id="entityManagerFactory" class="org.springframework.orm.jpa.LocalEntityManagerFactoryBean">
+        <property name="persistenceUnitName" value="SpringDaoJpaPU"/>
+    </bean>
+    <bean class="org.springframework.orm.jpa.support.PersistenceAnnotationBeanPostProcessor"/>
+    <bean class="org.springframework.dao.annotation.PersistenceExceptionTranslationPostProcessor"/>
+    
+    
+    <bean id="myTxManager" class="org.springframework.orm.jpa.JpaTransactionManager">
+        <property name="entityManagerFactory" ref="entityManagerFactory"/>
+    </bean>
+    <tx:advice id="txAdvice" transaction-manager="myTxManager">
+        <tx:attributes>
+            <tx:method name="get*" read-only="true"/>
+            <tx:method name="*"/>
+        </tx:attributes>
+    </tx:advice>
+    <aop:config>
+        <aop:pointcut id="servicioClientePointCut" expression="execution(* *.services.ClientService.*(..))"/>
+        <aop:advisor advice-ref="txAdvice" pointcut-ref="servicioClientePointCut"/>
+    </aop:config>
+	
+	<bean id="contactDao" class="org.course.spring.dao.ContactDaoImpl"/>
+    <bean id="comercialDao" class="org.course.spring.dao.ComercialDaoImpl"/>
+    
+    <bean id="clientService" class="org.course.spring.services.ClientServiceImpl">
+        <property name="comercialDao" ref="comercialDao"/>
+        <property name="contactDao" ref="contactDao"/>
+    </bean>
+</beans>

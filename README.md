@@ -41,3 +41,16 @@ List of exercises and examples of course:
 - spring-advanced-31-jpa-groovy: 
 - spring-advanced-32-hibernate-annotations: Anotaciones:  Uso Spring con Hibernate y anotaciones. Tratamiento de relaciones múltiples entre clases.
 - spring-advanced-33-jpa:
+- spring-advanced-34-web: Controladores básicos.
+- spring-advanced-35-web: Uso de Mapeadores.
+- spring-advanced-36-web: Configuración de log4j.
+- spring-advanced-37-web: Uso de un Multiaccióncontroller.
+- spring-advanced-38-web: Procesamiento de formularios con SimpleFormController.
+- spring-advanced-39-web: Integración con JSF. Reúso de acceso a datos con JPA (El proyecto SpringDaoJpa se usa como biblioteca)
+- spring-advanced-40-web: Uso de varios ViewResolvers. Creacion de vistas XML/XSL, Excel y Pdf.
+- spring-advanced-41-web: Envío de correo electrónico a trav�s de un asistente.
+- spring-advanced-42-web: Creación de un asistente.
+- spring-advanced-43-web: Subir un archivo usando Spring.
+- spring-advanced-44-web: Creación de vistas usando FreeMarker.
+- spring-advanced-45-web: Integración de Spring con Dojo.
+- spring-advanced-46-web-annotations: Creación de aplicaciones web usando anotaciones.

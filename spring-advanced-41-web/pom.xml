@@ -9,6 +9,9 @@
 	</parent>
 	<artifactId>spring-advanced-41-web</artifactId>
 	<packaging>war</packaging>
+	<properties>
+		<org.springframework.version>3.2.4.RELEASE</org.springframework.version>
+	</properties>
 	<dependencies>
 		<!-- spring -->
 		<dependency>

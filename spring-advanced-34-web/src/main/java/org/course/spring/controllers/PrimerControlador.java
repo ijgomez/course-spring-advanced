@@ -7,7 +7,7 @@
  * and open the template in the editor.
  */
 
-package controladores;
+package org.course.spring.controllers;
 
 import java.util.Date;
 import javax.servlet.http.HttpServletRequest;

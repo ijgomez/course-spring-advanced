@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="
+	       http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+	">
+
+	<!--Declaraciones de los beans escritos por nosotros -->
+	<!--El controlador múltiple -->
+	<bean name="delegadoMultiAccion" class="org.course.spring.controllers.DelegadoMultiAccion" />
+	
+	<!--El "comando" para enlace de datos con el formulario -->
+	<bean name="login" class="org.course.spring.beans.LoginImpl" />
+	
+	<!--El validador del formulario -->
+	<bean name="loginValidator" class="org.course.spring.validators.LoginValidator" />
+	
+	<!--Nuestro servicio de autenticacion -->
+	<bean name="loginService" class="org.course.spring.services.LoginServiceImpl" />
+</beans>

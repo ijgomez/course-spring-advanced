@@ -36,11 +36,8 @@
 		<!-- logging -->
 		<dependency>
 			<groupId>org.slf4j</groupId>
-			<artifactId>slf4j-api</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>org.slf4j</groupId>
 			<artifactId>slf4j-log4j12</artifactId>
+			<scope>runtime</scope>
 		</dependency>
 		
 		<!-- Testing -->
@@ -65,12 +62,13 @@
 		    <artifactId>poi</artifactId>
 		    <version>4.1.1</version>
 		</dependency>
+		
 		<!-- itext -->
-<dependency>
-    <groupId>com.lowagie</groupId>
-    <artifactId>itext</artifactId>
-    <version>2.1.7</version>
-</dependency>
+		<dependency>
+		    <groupId>com.lowagie</groupId>
+		    <artifactId>itext</artifactId>
+		    <version>2.1.7</version>
+		</dependency>
 		
 		
 	</dependencies>

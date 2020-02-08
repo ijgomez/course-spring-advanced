@@ -2,18 +2,17 @@
 <beans xmlns="http://www.springframework.org/schema/beans"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="
-	       http://www.springframework.org/schema/beans 
-	       http://www.springframework.org/schema/beans/spring-beans.xsd
+	       http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
 	">
 	<bean id="viewResolver" class="org.springframework.web.servlet.view.InternalResourceViewResolver">
 		<property name="viewClass" value="org.springframework.web.servlet.view.JstlView" />
-		<property name="prefix" value="/WEB-INF/paginas/" />
+		<property name="prefix" value="/pages/" />
 		<property name="suffix" value=".jsp" />
 	</bean>
 
 	<!-- Este mapeador es el que usa Spring por defecto, así que no es necesario 
 		declararlo <bean id="mapeador" class="org.springframework.web.servlet.handler.BeanNameUrlHandlerMapping"/> -->
 	
-	<bean name="/primera.curso" class="org.course.spring.controllers.PrimerControlador" />
-	<bean name="/segunda.curso" class="org.course.spring.controllers.SegundoControlador" />
+	<bean name="/primera.curso" class="org.course.spring.controllers.PrimerController" />
+	<bean name="/segunda.curso" class="org.course.spring.controllers.SegundoController" />
 </beans>

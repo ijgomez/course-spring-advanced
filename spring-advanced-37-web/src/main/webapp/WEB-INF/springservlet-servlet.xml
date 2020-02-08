@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="
+	       http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+	">
+	
+	<!--Mapa de peticiones (páginas lógicas) a controladores que las manejan. -->
+	<!--Obsérvese el uso de caracteres comodín, como el * -->
+    <bean class="org.springframework.web.servlet.handler.SimpleUrlHandlerMapping">
+        <property name="urlMap">
+            <map>
+                <entry key="/*.do" value-ref="controladorMultiple"/>
+            </map>
+        </property>
+    </bean>
+ 	
+ 	<!--Este bean colabora con el controlador múltiple, ligando páginas lógicas a métodos-->
+    <bean id="propsResolver" class="org.springframework.web.servlet.mvc.multiaction.PropertiesMethodNameResolver">
+        <property name="mappings">
+            <map>
+                <entry key="/entrada.do" value="manejarEntrada"/>
+                <entry key="/siguiente.do" value="manejarSiguiente"/>
+            </map>
+        </property>
+    </bean>
+    
+ 	<!--Un controlador múltiple. Se encarga del procesamiento de varias peticiones.-->
+    <bean id="controladorMultiple" class="org.springframework.web.servlet.mvc.multiaction.MultiActionController">
+        <property name="methodNameResolver" ref="propsResolver"/>
+        <property name="delegate" ref="delegadoMultiAccion"/>
+    </bean>
+    
+    
+    <!--Un "View Resolver". Le indicamos a Spring dónde encontrar nuestras páginas físicas-->
+    <bean id="viewResolver" class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+		<property name="viewClass" value="org.springframework.web.servlet.view.JstlView" />
+		<property name="prefix" value="/pages/" />
+		<property name="suffix" value=".jsp" />
+	</bean>
+	
+ 	<!--Declaraciones de los beans escritos por nosotros-->
+    <bean name="delegadoMultiAccion" class="org.course.spring.controllers.DelegadoMultiAccion"/>
+</beans>

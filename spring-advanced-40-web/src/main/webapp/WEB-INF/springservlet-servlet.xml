@@ -1,33 +1,34 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <beans xmlns="http://www.springframework.org/schema/beans"
-       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-       xsi:schemaLocation="http://www.springframework.org/schema/beans 
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans 
        http://www.springframework.org/schema/beans/spring-beans-2.5.xsd">
-    <bean id="jspViewResolver"
-          class="org.springframework.web.servlet.view.InternalResourceViewResolver">
-        <property name="viewClass"
-                  value="org.springframework.web.servlet.view.JstlView"/>
-        <property name="prefix" value="/WEB-INF/paginas/"/>
-        <property name="suffix" value=".jsp"/>
-        <property name="order" value="2"/>
-    </bean>
-    <bean id="xslViewResolver"
-          class="org.springframework.web.servlet.view.ResourceBundleViewResolver">
-        <property name="basename" value="recursos/views"/>
-        <property name="order" value="1"/>
-    </bean>
-    <bean id="primerControlador" class="controladores.PrimerControlador"/>
-    <bean id="controladorXsl" class="controladores.ControladorXsl"/>
-    <bean id="controladorExcel" class="controladores.ControladorExcel"/>
-    <bean id="controladorPdf" class="controladores.ControladorPdf"/>
-    <bean class="org.springframework.web.servlet.handler.SimpleUrlHandlerMapping">
-        <property name="urlMap">
-            <map>
-                <entry key="/primera.curso" value-ref="primerControlador"/>
-                <entry key="/segunda.curso" value-ref="controladorXsl"/>
-                <entry key="/tercera.curso" value-ref="controladorExcel"/>
-                <entry key="/cuarta.curso" value-ref="controladorPdf"/>
-            </map>
-        </property>
-    </bean>
+
+	<bean id="xslViewResolver" class="org.springframework.web.servlet.view.ResourceBundleViewResolver">
+		<property name="basename" value="views" />
+		<property name="order" value="1" />
+	</bean>
+
+	<bean id="viewResolver" class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+		<property name="viewClass" value="org.springframework.web.servlet.view.JstlView" />
+		<property name="prefix" value="/pages/" />
+		<property name="suffix" value=".jsp" />
+		<property name="order" value="2" />
+	</bean>
+
+	<bean id="primerControlador" class="org.course.spring.controllers.PrimerControlador" />
+	<bean id="controladorXsl" class="org.course.spring.controllers.XslController" />
+	<bean id="controladorExcel" class="org.course.spring.controllers.ExcelController" />
+	<bean id="controladorPdf" class="org.course.spring.controllers.PdfController" />
+	
+	<bean class="org.springframework.web.servlet.handler.SimpleUrlHandlerMapping">
+		<property name="urlMap">
+			<map>
+				<entry key="/primera.curso" value-ref="primerControlador" />
+				<entry key="/segunda.curso" value-ref="controladorXsl" />
+				<entry key="/tercera.curso" value-ref="controladorExcel" />
+				<entry key="/cuarta.curso" value-ref="controladorPdf" />
+			</map>
+		</property>
+	</bean>
 </beans>

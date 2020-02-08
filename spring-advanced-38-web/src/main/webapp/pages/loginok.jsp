@@ -6,7 +6,7 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=windows-1252"/>
         <title>primera</title>
-        <link href="css/oracle.css" rel="stylesheet" media="screen"/>
+        <link href="${pageContext.request.contextPath}/css/oracle.css" rel="stylesheet" media="screen"/>
     </head>
     <body><p>
             <c:if test="${!empty errorLogin}">

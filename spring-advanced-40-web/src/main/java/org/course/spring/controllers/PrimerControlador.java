@@ -1,12 +1,3 @@
-/*
- * PrimerControlador.java
- *
- * Created on 10 de junio de 2007, 21:08
- *
- * To change this template, choose Tools | Template Manager
- * and open the template in the editor.
- */
-
 package org.course.spring.controllers;
 
 import javax.servlet.http.HttpServletRequest;

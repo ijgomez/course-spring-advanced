@@ -6,7 +6,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=windows-1252"/>
     <title>primera</title>
-    <link href="css/jdeveloper.css" rel="stylesheet" media="screen"/>
+    <link href="${pageContext.request.contextPath}/css/jdeveloper.css" rel="stylesheet" media="screen"/>
   </head>
   <body><h1>
       Quinto ejemplo de una aplicaci&oacute;n Web hecha con Spring 2.0.

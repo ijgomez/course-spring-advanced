@@ -6,7 +6,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=windows-1252"/>
     <title>primera</title>
-    <link href="css/blaf.css" rel="stylesheet" media="screen"/>
+    <link href="${pageContext.request.contextPath}/css/blaf.css" rel="stylesheet" media="screen"/>
   </head>
   <body><p>
       <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>

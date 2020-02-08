@@ -49,5 +49,5 @@
             </tr>
         </table>
     </form:form>
-</p></body>
+</body>
 </html>

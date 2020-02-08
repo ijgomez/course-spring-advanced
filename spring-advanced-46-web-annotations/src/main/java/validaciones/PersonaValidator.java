@@ -1,8 +1,3 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
-
 package validaciones;
 
 import beans.Persona;
@@ -10,18 +5,15 @@ import org.springframework.validation.Errors;
 import org.springframework.validation.ValidationUtils;
 import org.springframework.validation.Validator;
 
-/**
- *
- * @author Chema
- */
 public class PersonaValidator implements Validator{
 
-    public boolean supports(Class clazz) {
+    public boolean supports(Class<?> clazz) {
         return Persona.class.isAssignableFrom(clazz);
     }
 
     public void validate(Object target, Errors errors) {
         Persona persona = (Persona) target;
+        
         ValidationUtils.rejectIfEmptyOrWhitespace(errors, "nombre", "nombre.vacio", "El nombre está vacío");
         ValidationUtils.rejectIfEmptyOrWhitespace(errors, "apellido", "apellido.vacio", "El apellido está vacío");        
         if (persona.getNombre().length() < 3) {

@@ -1,12 +1,3 @@
-/*
- * PrimerControlador.java
- *
- * Created on 10 de junio de 2007, 21:08
- *
- * To change this template, choose Tools | Template Manager
- * and open the template in the editor.
- */
-
 package controladores;
 
 import freemarker.template.Configuration;
@@ -23,23 +14,14 @@ import org.springframework.web.servlet.mvc.Controller;
 import org.springframework.web.servlet.support.RequestContextUtils;
 import org.springframework.web.servlet.view.freemarker.FreeMarkerConfigurer;
 
-/**
- *
- * @author user
- */
 public class PrimerControlador implements Controller{
-    
-    /** Creates a new instance of PrimerControlador */
-    public PrimerControlador() {
-    }
-    
-    @SuppressWarnings("unchecked")
+
     public ModelAndView handleRequest(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse) throws Exception {
         WebApplicationContext ctx =  RequestContextUtils.getWebApplicationContext(httpServletRequest);
         FreeMarkerConfigurer f = (FreeMarkerConfigurer) ctx.getBean("freemarkerConfig");
         Configuration c = f.getConfiguration();
         Template temp = c.getTemplate("primera.ftl");
-        Map root = new HashMap();
+        Map<String, Object> root = new HashMap<String, Object>();
         root.put("controlador",getClass().getName());
         Writer out = new OutputStreamWriter(System.out);
         temp.process(root, out);

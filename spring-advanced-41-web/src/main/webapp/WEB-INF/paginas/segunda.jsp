@@ -8,7 +8,7 @@
     <meta http-equiv="Content-Type"
           content="text/html; charset=windows-1252"/>
     <title>primera</title>
-    <link href="css/oracle.css" rel="stylesheet" media="screen"/>
+    <link href="/css/oracle.css" rel="stylesheet" media="screen"/>
 </head>
 <body><h1>
         Segunda página del asistente.
@@ -43,5 +43,5 @@
             </tr>
         </table>
     </form:form>
-</p></body>
+</body>
 </html>

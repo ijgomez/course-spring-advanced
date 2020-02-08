@@ -54,14 +54,17 @@
 		</dependency>
 		
 		<!-- J2EE -->
-		<dependency>
-		    <groupId>javax.servlet</groupId>
-		    <artifactId>javax.servlet-api</artifactId>
+		<dependency>  
+		    <groupId>javax</groupId>    
+		    <artifactId>javaee-web-api</artifactId>    
+		    <version>7.0</version> <!-- Put here the version of your Java EE app, in my case 7.0 -->
+		    <scope>provided</scope>
 		</dependency>
 		<dependency>
 		    <groupId>javax.servlet</groupId>
 		    <artifactId>jstl</artifactId>
 		</dependency>
+		
 		<dependency>
 		    <groupId>javax.mail</groupId>
 		    <artifactId>javax.mail-api</artifactId>

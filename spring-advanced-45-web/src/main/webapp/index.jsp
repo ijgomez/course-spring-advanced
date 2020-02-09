@@ -5,7 +5,7 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>SpringWeb0012</title>
         <style type="text/css">
-            @import "http://o.aolcdn.com/dojo/1.2.3/dijit/themes/soria/soria.css";
+            @import "http://ajax.googleapis.com/ajax/libs/dojo/1.2.3/dijit/themes/soria/soria.css";
         </style>
 
         <style type="text/css">
@@ -32,7 +32,7 @@
                 margin: 0;
                 padding: 0;
                 background: #fff
-                url('http://o.aolcdn.com/dojo/1.2.3/dojox/image/resources/images/loading.gif')
+                url('https://ajax.googleapis.com/ajax/libs/dojo/1.2.3/dojox/image/resources/images/loading.gif')
                 no-repeat center center;
                 position: absolute;
                 z-index: 999;
@@ -44,7 +44,7 @@
             }
         </style>
 
-        <script src="http://o.aolcdn.com/dojo/1.2.3/dojo/dojo.xd.js"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/dojo/1.2.3/dojo/dojo.xd.js"></script>
 
         <script type="text/javascript">
             var ocultarCargador = function() {

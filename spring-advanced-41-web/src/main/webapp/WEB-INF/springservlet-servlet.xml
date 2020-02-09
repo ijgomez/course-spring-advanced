@@ -1,40 +1,42 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <beans xmlns="http://www.springframework.org/schema/beans"
-       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-       xsi:schemaLocation="
-       http://www.springframework.org/schema/beans 
-       http://www.springframework.org/schema/beans/spring-beans-2.5.xsd">
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="
+		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+    ">
+    
     <!--Un "View Resolver". Le indicamos a Spring dónde encontrar nuestras páginas físicas-->
-    <bean id="viewResolver"
-          class="org.springframework.web.servlet.view.InternalResourceViewResolver">
-        <property name="viewClass"
-                  value="org.springframework.web.servlet.view.JstlView"/>
-        <property name="prefix" value="/WEB-INF/paginas/"/>
-        <property name="suffix" value=".jsp"/>
-    </bean>
-    <bean name="/comienzo.curso" class="controladores.AsistenteController">
+    <bean id="viewResolver" class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+		<property name="viewClass" value="org.springframework.web.servlet.view.JstlView" />
+		<property name="prefix" value="/pages/" />
+		<property name="suffix" value=".jsp" />
+	</bean>
+	
+    <bean name="/comienzo.curso" class="org.course.spring.controllers.AsistenteController">
         <property name="demoCorreo" ref="demoCorreo"/>
     </bean>
-    <bean name="comandoPersona" class="comandos.ComandoPersona"/>
-    <bean id="enviadorCorreo" class="utilidades.EnviadorCorreoImpl">
+    
+    <bean name="comandoPersona" class="org.course.spring.beans.Person"/>
+    
+    <bean id="enviadorCorreo" class="org.course.spring.utils.EnviadorCorreoImpl">
         <property name="host" value="smtphost"/>
         <property name="javaMailProperties">
             <props>
-                <prop key="mail.smtp.auth">true
-                </prop>
-                <prop key="mail.smtp.user">abc@xyz.com
-                </prop>
-                <prop key="mail.smtp.password">una clave
-                </prop>
+                <prop key="mail.smtp.auth">true</prop>
+                <prop key="mail.smtp.user">abc@xyz.com</prop>
+                <prop key="mail.smtp.password">una clave</prop>
             </props>
         </property>
     </bean>
+    
     <bean id="plantillaMensaje" class="org.springframework.mail.SimpleMailMessage">
         <property name="from" value="def@xyz.com"/>
         <property name="subject" value="Demo correo"/>
     </bean>
-    <bean id="demoCorreo" class="utilidades.DemoCorreoImpl">
+    
+    <bean id="demoCorreo" class="org.course.spring.utils.DemoCorreoImpl">
         <property name="enviadorCorreo" ref="enviadorCorreo"/>
         <property name="plantillaMensaje" ref="plantillaMensaje"/>
     </bean>
+    
 </beans>

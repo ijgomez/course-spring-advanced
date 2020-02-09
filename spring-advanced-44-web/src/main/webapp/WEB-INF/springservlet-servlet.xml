@@ -1,23 +1,28 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <beans xmlns="http://www.springframework.org/schema/beans"
-       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-       xsi:schemaLocation="
-       http://www.springframework.org/schema/beans 
-       http://www.springframework.org/schema/beans/spring-beans-2.5.xsd">
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="
+		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+    ">
+    
     <bean id="viewResolverFreeMarker" class="org.springframework.web.servlet.view.freemarker.FreeMarkerViewResolver">
         <property name="cache" value="true"/>
         <property name="prefix" value=""/>
         <property name="suffix" value=".ftl"/>
         <property name="exposeSpringMacroHelpers" value="true"/>
     </bean>
+    
     <bean id="freemarkerConfig" class="org.springframework.web.servlet.view.freemarker.FreeMarkerConfigurer">
-        <property name="templateLoaderPath" value="/WEB-INF/freemarker/"/>
+        <property name="templateLoaderPath" value="/freemarker/"/>
         <property name="freemarkerVariables">
             <map>
                 <entry key="xml_escape" value-ref="fmXmlEscape"/>
             </map>
         </property>
     </bean>
+    
     <bean id="fmXmlEscape" class="freemarker.template.utility.XmlEscape"/>
-    <bean name="/primera.curso" class="controladores.PrimerControlador"/>
+    
+    <bean name="/primera.curso" class="org.course.spring.controllers.PrimerControlador"/>
+    
 </beans>
